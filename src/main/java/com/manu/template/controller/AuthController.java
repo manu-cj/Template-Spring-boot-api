@@ -29,4 +29,10 @@ public class AuthController {
     public JwtResponseDTO login(@RequestBody @Valid UserLoginDTO userLoginDTO) {
         return authService.authenticate(userLoginDTO);
     }
+
+    @PostMapping("/register/admin")
+    public ResponseEntity<String> registerAdmin(@RequestBody @Valid UserRegistrationDTO user) {
+        userService.registerNewAdmin(user);
+        return ResponseEntity.ok("Registration successful");
+    }
 }

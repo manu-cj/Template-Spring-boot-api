@@ -24,4 +24,13 @@ public class UserService {
                 .build();
         return userRepository.save(user);
     }
+
+    public User registerNewAdmin(UserRegistrationDTO registrationDTO) {
+        User user = User.builder()
+                .username(registrationDTO.getUsername())
+                .password(passwordEncoder.encode(registrationDTO.getPassword()))
+                .roles(Collections.singleton("ADMIN"))
+                .build();
+        return userRepository.save(user);
+    }
 }
