@@ -5,6 +5,7 @@ import com.manu.template.dto.UUIDAdapter;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotNull;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -21,13 +22,14 @@ public class Payment {
     private double amount;
     private String currency;
     private LocalDate date;
-    private String method;
-    private String status;
+    private Method method;
+    @NotNull
+    private Status status = Status.PENDING;
 
     // Constructeur vide obligatoire pour JAXB
     public Payment() {}
 
-    public Payment(UUID id, double amount, String currency, LocalDate date, String method, String status) {
+    public Payment(UUID id, double amount, String currency, LocalDate date, Method method, Status status) {
         this.id = id;
         this.amount = amount;
         this.currency = currency;
@@ -55,10 +57,10 @@ public class Payment {
     public void setDate(LocalDate date) { this.date = date; }
 
     @XmlElement
-    public String getMethod() { return method; }
-    public void setMethod(String method) { this.method = method; }
+    public Method getMethod() { return method; }
+    public void setMethod(Method method) { this.method = method; }
 
     @XmlElement
-    public String getStatus() { return status; }
-    public void setStatus(String status) { this.status = status; }
+    public Status getStatus() { return status; }
+    public void setStatus(Status status) { this.status = status; }
 }

@@ -1,5 +1,8 @@
 package com.manu.template.dto;
 
+import com.manu.template.model.Method;
+import com.manu.template.model.Status;
+import jakarta.validation.constraints.NotNull;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlRootElement;
@@ -16,8 +19,9 @@ public class PaymentDTO {
     private String currency;
     @XmlJavaTypeAdapter(LocalDateAdapter.class)
     private LocalDate date;
-    private String method;
-    private String status;
+    private Method method;
+    @NotNull
+    private Status status = Status.PENDING;
 
     public PaymentDTO() {}
 
@@ -34,9 +38,9 @@ public class PaymentDTO {
     public LocalDate getDate() { return date; }
     public void setDate(LocalDate date) { this.date = date; }
 
-    public String getMethod() { return method; }
-    public void setMethod(String method) { this.method = method; }
+    public Method getMethod() { return method; }
+    public void setMethod(Method method) { this.method = method; }
 
-    public String getStatus() { return status; }
-    public void setStatus(String status) { this.status = status; }
+    public Status getStatus() { return status; }
+    public void setStatus(Status status) { this.status = status; }
 }
