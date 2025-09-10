@@ -2,25 +2,46 @@ package com.manu.template.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
+import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
-@Data
 @NoArgsConstructor
+@Getter
+@Setter
 @AllArgsConstructor
 @Builder
 @Table(name = "users")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue()
+    private UUID id;
+
+    private String firstname;
+
+    private String lastname;
 
     @Column(unique = true)
     private String username;
 
+    @Column(unique = true)
+    private String email;
+
     private String password;
 
     @ElementCollection(fetch = FetchType.EAGER)
-    private Set<String> roles;
+    private Set<String> roles = new HashSet<>();
+
+    @Column(updatable = false)
+    @CreatedDate
+    private LocalDateTime createdAt;
+
+    @LastModifiedDate
+    private LocalDateTime updatedAt;
+
 }
